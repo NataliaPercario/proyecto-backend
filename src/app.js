@@ -31,6 +31,7 @@ app.get("/products/:pid", async (req, res) => {
     if (!products) {
       return res.json({ error: "ID no encontrado" });
     }
+    res.json(products);
   } catch (error) {
     res.status(500).json({ error: "error interno del servidor" });
   }
