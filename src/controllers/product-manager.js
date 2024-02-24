@@ -1,3 +1,5 @@
+const { Router } = require("express");
+
 const fs = require("fs").promises;
 
 class ProductManager {
@@ -150,3 +152,4 @@ class ProductManager {
 }
 
 module.exports = ProductManager;
+//module.exports = Router;
