@@ -1,5 +1,3 @@
-const { Router } = require("express");
-
 const fs = require("fs").promises;
 
 class ProductManager {
@@ -75,7 +73,6 @@ class ProductManager {
     try {
       const arrayProductos = await this.leerArchivo();
       const buscado = arrayProductos.find((item) => item.id === id);
-
       if (!buscado) {
         console.log("Producto no encontrado");
         return null;
@@ -112,9 +109,7 @@ class ProductManager {
   async updateProduct(id, productoActualizado) {
     try {
       const arrayProductos = await this.leerArchivo();
-
       const index = arrayProductos.findIndex((item) => item.id === id);
-
       if (index !== -1) {
         arrayProductos[index] = {
           ...arrayProductos[index],
@@ -134,9 +129,7 @@ class ProductManager {
   async deleteProduct(id) {
     try {
       const arrayProductos = await this.leerArchivo();
-
       const index = arrayProductos.findIndex((item) => item.id === id);
-
       if (index !== -1) {
         arrayProductos.splice(index, 1);
         await this.guardarArchivo(arrayProductos);
@@ -152,4 +145,3 @@ class ProductManager {
 }
 
 module.exports = ProductManager;
-//module.exports = Router;
