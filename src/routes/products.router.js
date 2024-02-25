@@ -8,7 +8,7 @@ const productManager = new ProductManager("./src/models/products.json");
 //1) Listar los prpductos del archivo JSON
 router.get("/", async (req, res) => {
   try {
-    const limit = req.query.limit; 
+    const limit = req.query.limit;
     const products = await productManager.getProducts();
     if (limit) {
       res.json(products.slice(0, limit));
