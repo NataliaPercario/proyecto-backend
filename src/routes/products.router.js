@@ -22,8 +22,8 @@ router.get("/", async (req, res) => {
 
 //2) Retornamos producto por ID
 router.get("/:pid", async (req, res) => {
-  try {
-    let id = req.params.pid;
+  const id = req.params.pid;
+  try {    
     const products = await productManager.getProductById(parseInt(id));
     if (!products) {
       return res.json({ error: "ID no encontrado" });

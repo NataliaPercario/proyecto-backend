@@ -19,14 +19,14 @@ class ProductManager {
     thumbnails,
   }) {
     try {
-      const arrayProductos = await this.leerArchivo();
+      const arrayProducts = await this.leerArchivo();
 
       if (!title || !description || !price || !code || !stock || !category) {
         console.log("Todos los campos son obligatorios");
         return;
       }
 
-      if (arrayProductos.some((item) => item.code === code)) {
+      if (arrayProducts.some((item) => item.code === code)) {
         console.log("El código debe ser único");
         return;
       }
@@ -43,8 +43,8 @@ class ProductManager {
         thumbnails: thumbnails || [],
       };
 
-      if (arrayProductos.length > 0) {
-        ProductManager.ultId = arrayProductos.reduce(
+      if (arrayProducts.length > 0) {
+        ProductManager.ultId = arrayProducts.reduce(
           (maxId, product) => Math.max(maxId, product.id),
           0
         );
@@ -52,8 +52,8 @@ class ProductManager {
 
       newProduct.id = ++ProductManager.ultId;
 
-      arrayProductos.push(newProduct);
-      await this.guardarArchivo(arrayProductos);
+      arrayProducts.push(newProduct);
+      await this.guardarArchivo(arrayProducts);
     } catch (error) {
       console.log("Error al agregar producto", error);
       throw error;
@@ -61,8 +61,8 @@ class ProductManager {
   }
   async getProducts() {
     try {
-      const arrayProductos = await this.leerArchivo();
-      return arrayProductos;
+      const arrayProducts = await this.leerArchivo();
+      return arrayProducts;
     } catch (error) {
       console.log("Error al leer el archivo", error);
       throw error;
@@ -71,8 +71,8 @@ class ProductManager {
 
   async getProductById(id) {
     try {
-      const arrayProductos = await this.leerArchivo();
-      const buscado = arrayProductos.find((item) => item.id === id);
+      const arrayProducts = await this.leerArchivo();
+      const buscado = arrayProducts.find((item) => item.id === id);
       if (!buscado) {
         console.log("Producto no encontrado");
         return null;
@@ -89,17 +89,17 @@ class ProductManager {
   async leerArchivo() {
     try {
       const respuesta = await fs.readFile(this.path, "utf-8");
-      const arrayProductos = JSON.parse(respuesta);
-      return arrayProductos;
+      const arrayProducts = JSON.parse(respuesta);
+      return arrayProducts;
     } catch (error) {
       console.log("Error al leer un archivo", error);
       throw error;
     }
   }
 
-  async guardarArchivo(arrayProductos) {
+  async guardarArchivo(arrayProducts) {
     try {
-      await fs.writeFile(this.path, JSON.stringify(arrayProductos, null, 2));
+      await fs.writeFile(this.path, JSON.stringify(arrayProducts, null, 2));
     } catch (error) {
       console.log("Error al guardar el archivo", error);
       throw error;
@@ -108,14 +108,14 @@ class ProductManager {
 
   async updateProduct(id, productoActualizado) {
     try {
-      const arrayProductos = await this.leerArchivo();
-      const index = arrayProductos.findIndex((item) => item.id === id);
+      const arrayProducts = await this.leerArchivo();
+      const index = arrayProducts.findIndex((item) => item.id === id);
       if (index !== -1) {
-        arrayProductos[index] = {
-          ...arrayProductos[index],
+        arrayProducts[index] = {
+          ...arrayProducts[index],
           ...productoActualizado,
         };
-        await this.guardarArchivo(arrayProductos);
+        await this.guardarArchivo(arrayProducts);
         console.log("Producto actualizado");
       } else {
         console.log("No se encontró el producto");
@@ -128,11 +128,11 @@ class ProductManager {
 
   async deleteProduct(id) {
     try {
-      const arrayProductos = await this.leerArchivo();
-      const index = arrayProductos.findIndex((item) => item.id === id);
+      const arrayProducts = await this.leerArchivo();
+      const index = arrayProducts.findIndex((item) => item.id === id);
       if (index !== -1) {
-        arrayProductos.splice(index, 1);
-        await this.guardarArchivo(arrayProductos);
+        arrayProducts.splice(index, 1);
+        await this.guardarArchivo(arrayProducts);
         console.log("Producto eliminado");
       } else {
         console.log("No se encontró el producto");
