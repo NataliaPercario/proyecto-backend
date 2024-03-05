@@ -1,16 +1,5 @@
 [
   {
-    "id": 1,
-    "title": "Zapatillas Adidas Grand Court",
-    "description": "zapatillas para niños",
-    "price": 78.999,
-    "thumbnail": "https://www.dexter.com.ar/on/demandware.static/-/Sites-365-dabra-catalog/default/dwf6c07d7c/products/ADGW6511/ADGW6511-1.JPG",
-    "code": "ABC123",
-    "stock": 10,
-    "status": true,
-    "category": "Ofertas"
-  },
-  {
     "id": 2,
     "title": "Zapatillas Capitan",
     "description": "zapatillas para hombre",
@@ -108,5 +97,17 @@
     "stock": 8,
     "status": true,
     "category": "Nuevos ingresos"
+  },
+  {
+    "title": "zapas",
+    "description": "de prueba",
+    "price": "15",
+    "img": "Sin Imagen",
+    "code": "55555",
+    "stock": "1",
+    "category": "oferta",
+    "status": true,
+    "thumbnails": [],
+    "id": 11
   }
 ]
